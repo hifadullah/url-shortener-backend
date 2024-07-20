@@ -1,6 +1,8 @@
 import { MongoClient } from "mongodb";
 import Obj from "mongodb";
 import dotenv from "dotenv";
+require('dotenv').config();
+
 
 dotenv.config();
 const mongoConnectString = process.env.MONGODB_URI;
