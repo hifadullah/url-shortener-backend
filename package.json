@@ -2,14 +2,15 @@
   "name": "url-shortener-backend",
   "version": "1.0.0",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "start": "node index.js"
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
+  "description": "This Program will support backend of URL Shortner Application",
   "dependencies": {
     "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
