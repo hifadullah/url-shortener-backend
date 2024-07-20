@@ -13,7 +13,6 @@ let client;
 let clientPromise;
 
 if (process.env.NODE_ENV === 'development') {
-  // In development mode, use a global variable to preserve the value across module reloads caused by HMR (Hot Module Replacement).
   if (!global._mongoClientPromise) {
     client = new MongoClient(uri, {
       useNewUrlParser: true,
@@ -23,10 +22,9 @@ if (process.env.NODE_ENV === 'development') {
   }
   clientPromise = global._mongoClientPromise;
 } else {
-  // In production mode, it's best to not use a global variable.
   client = new MongoClient(uri, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
   });
   clientPromise = client.connect();
 }
