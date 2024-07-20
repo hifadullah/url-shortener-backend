@@ -1,32 +1,16 @@
-import { MongoClient } from 'mongodb';
-import dotenv from 'dotenv';
+import { MongoClient } from "mongodb";
+import Obj from "mongodb";
+import dotenv from "dotenv";
 
 dotenv.config();
+const mongoConnectString = process.env.MONGODB_URI;
 
-const uri = process.env.MONGO_URI;
-
-if (!uri) {
-  throw new Error('Please define the MONGO_URI environment variable inside .env');
+export async function dbConnection() {
+  const client = new MongoClient(mongoConnectString);
+  await client.connect();
+  console.log("Mongo DB connected succesfully");
+  return client;
 }
 
-let client;
-let clientPromise;
-
-if (process.env.NODE_ENV === 'development') {
-  if (!global._mongoClientPromise) {
-    client = new MongoClient(uri, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
-    global._mongoClientPromise = client.connect();
-  }
-  clientPromise = global._mongoClientPromise;
-} else {
-  client = new MongoClient(uri, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-  });
-  clientPromise = client.connect();
-}
-
-export default clientPromise;
+export var ObjectId = Obj.ObjectId;
+export const client = await dbConnection();
